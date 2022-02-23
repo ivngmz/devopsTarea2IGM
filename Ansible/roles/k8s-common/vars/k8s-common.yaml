@@ -1,0 +1,4 @@
+---
+vars:
+  rpms: ['kubelet', 'kubeadm', 'kubectl']
+...

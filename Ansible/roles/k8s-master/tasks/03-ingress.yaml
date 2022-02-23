@@ -1,0 +1,4 @@
+---
+- name: "Instalar Ingress para acceso a pods"
+  command: kubectl apply -f https://raw.githubusercontent.com/haproxytech/kubernetes-ingress/master/deploy/haproxy-ingress.yaml
+...

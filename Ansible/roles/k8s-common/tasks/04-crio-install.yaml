@@ -1,0 +1,15 @@
+---
+- name: "DNF update previo"
+  dnf:
+    name:  "*"
+    state: latest 
+- name: "Instala paquete cri-o"
+  dnf:
+    name: cri-o
+    state: latest
+- name: "Inicia y activa servicio crio"
+  ansible.builtin.service:
+    name: crio
+    enabled: yes
+    state: started
+...

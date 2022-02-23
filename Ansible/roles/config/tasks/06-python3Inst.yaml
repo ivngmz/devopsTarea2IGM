@@ -1,0 +1,6 @@
+- name: Install python3 package
+  dnf:
+    name:
+      - python3
+    state: latest
+...

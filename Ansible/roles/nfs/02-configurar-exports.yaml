@@ -1,0 +1,18 @@
+---
+- name: "Añadir a exports"
+  lineinfile:
+    path: /etc/exports
+    state: present
+    line: "{{ item }}"
+  with_items:
+    - '/srv/nfs    192.168.0.115(rw,sync)'
+    - '/srv/nfs    192.168.0.116(rw,sync)'
+    - '/srv/nfs    192.168.0.117(rw,sync)'
+- name: "Reinicia servicio"
+  ansible.builtin.systemd:
+    daemon_reload: yes
+    state: started
+    name: nfs-server.service
+- name: "Recarga exports"
+  command: exportfs -r
+...        

@@ -1,0 +1,10 @@
+---
+- hosts: NFS
+  tasks:
+    - name: Hacer
+      shell:
+        cmd: echo {{ item }}
+      with_items:
+        - coche
+        - moto
+...

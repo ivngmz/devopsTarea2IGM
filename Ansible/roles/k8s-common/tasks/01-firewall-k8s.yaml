@@ -1,0 +1,47 @@
+---
+- name: "Reemplazo valor en AllowZoneDrifting"
+  ansible.builtin.replace:
+    path: /etc/firewalld/firewalld.conf
+    after: 'AllowZoneDrifting='
+    regexp: '^(.+)$'
+    replace: 'no'
+- name: "Añado modulo br_netfilter"
+  community.general.modprobe:
+    name: br_netfilter
+    state: present
+- name: "Agrego masquerade permanente"
+  ansible.posix.firewalld:
+    masquerade: yes
+    state: enabled
+    permanent: yes
+- name: "Reinicio firewalld"
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: firewalld
+- name: "Asegura que br_netfilter está activado"
+  modprobe:
+    name: br_netfilter
+    state: present
+- name: "Copia archivo k8s.conf"
+  ansible.builtin.copy:
+    src:  ../templates/k8s.conf
+    dest: /etc/sysctl.d/k8s.conf
+    mode: '0664'
+  register: result  
+- name: "Reinicia sysctl, recargando todos los archivos de configuracion"
+  shell: sysctl --system
+  when: result.changed
+- name: "Abro puertos de comunicacion entre pods y master"
+  firewalld:
+    port: "{{ item }}"
+    permanent: true
+    state: enabled
+  loop:
+    - 8285/tcp
+    - 8472/tcp
+- name: "Reiniciar firewalld"
+  systemd:
+    name: firewalld
+    state: reloaded
+...

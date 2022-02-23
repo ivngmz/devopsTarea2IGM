@@ -1,0 +1,19 @@
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_user=aristoteles
+
+[ALL]
+master.acme.es ansible_ssh_host=192.168.0.115
+worker1.acme.es ansible_ssh_host=192.168.0.116
+worker2.acme.es ansible_ssh_host=192.168.0.117
+nfs.acme.es ansible_ssh_host=192.168.0.118
+
+[NFS]
+nfs.acme.es ansible_ssh_host=192.168.0.118
+
+[WORKERS]
+worker1.acme.es ansible_ssh_host=192.168.0.116
+worker2.acme.es ansible_ssh_host=192.168.0.117
+
+[MASTER]
+master.acme.es ansible_ssh_host=192.168.0.115

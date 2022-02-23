@@ -1,0 +1,26 @@
+---
+- name: "Tareas comunes"
+  hosts: ALL
+  become: true
+  roles: 
+    - config
+- name: "Tareas en servidor NFS"  
+  hosts: [NFS]     
+  become: true                
+  roles:
+    - nfs
+- name: "Tareas comunes k8s"  
+  hosts: [MASTER,WORKERS]
+  become: true
+  roles:
+    - k8s-common
+- name: "Tareas en master"
+  hosts: [MASTER]
+  become: true
+  roles:   
+    - k8s-master
+- name: "Tareas en workers"
+  hosts: [WORKERS]
+  become: true
+  roles:
+    - k8s-workers

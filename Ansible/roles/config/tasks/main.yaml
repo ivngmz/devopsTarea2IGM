@@ -1,0 +1,10 @@
+---
+- include_tasks: 00-dnfupdate.yaml     
+- include_tasks: 01-chrony.yaml        
+- include_tasks: 02-hostname.yaml      
+- include_tasks: 03-selinux.yaml       
+- include_tasks: 04-createNFSDir.yaml  
+- include_tasks: 05-hosts.yaml         
+- include_tasks: 06-python3Inst.yaml   
+- include_tasks: 07-unswapping.yaml   
+...

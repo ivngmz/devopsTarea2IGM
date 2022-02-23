@@ -1,0 +1,24 @@
+---
+- name: "Abrir puertos firewall"
+  firewalld:
+    port: "{{ item }}"
+    permanent: true
+    state: enabled
+  with_items:
+    - 6443/tcp
+    - 2379-2380/tcp
+    - 10250-10252/tcp
+    - 10255/tcp
+- name: "Reiniciar firewalld"
+  systemd:
+    name: firewalld
+    state: reloaded
+- name: "Reglas de acceso de los Workers"
+  firewalld:
+    rich_rule: "{{ item }}"
+    permanent: true
+    state: enabled
+  loop:
+    - 'rule family=ipv4 source address=192.168.1.114/32 accept'
+    - 'rule family=ipv4 source address=192.168.1.115/32 accept'
+...

@@ -1,0 +1,8 @@
+- name: "Crear directorio para NFS"
+  file:
+    path: /srv/nfs
+    state: directory
+    owner: aristoteles
+    group: aristoteles
+    mode: 0775
+    recurse: yes

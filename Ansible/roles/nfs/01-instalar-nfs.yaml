@@ -1,0 +1,17 @@
+---
+- name: "Instalar nfs-utils"
+  package: 
+    name=nfs-utils
+    state=installed
+- name: "Instalar net-tools"
+  package:
+    name=net-tools
+    state=present
+- name: "Compruebo que ha sido instalado"
+  service:
+    name: rpcbind
+    state: started
+    enabled: true
+...
+
+

@@ -1,0 +1,7 @@
+---
+- include: '01-firewall-k8s.yaml'
+- include: '02-unswapping.yaml'
+- include: '03-cluster-repos.yaml'
+- include: '04-crio-install.yaml'
+- include: '05-k8s-install.yaml'
+...

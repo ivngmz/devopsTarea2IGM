@@ -1,0 +1,12 @@
+---
+- name: "Añadir a exports"
+  lineinfile:
+    path: /etc/hosts
+    state: present
+    line: "{{ item }}"
+  with_items:
+    - '192.168.1.115 kubemaster kubemaster.acme.es'
+    - '192.168.1.116 kubenode1 kubenode1.acme.es'
+    - '192.168.1.117 kubenode2 kubenode2.acme.es'
+    - '192.168.1.118 nfs nfs.acme.es'
+...

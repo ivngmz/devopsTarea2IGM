@@ -1,0 +1,22 @@
+---
+- name: " Abrir puertos firewall" 
+  firewalld:          
+    port: "{{ item }}"
+    permanent: true
+    zone: public   
+    state: enabled   
+  with_items:         
+    - 10250/tcp        
+    - 30000-32767/tcp
+- name: "Reiniciar firewalld"  
+  systemd:                     
+    name: firewalld            
+    state: reloaded            
+- name: Copy the join command to server location                     
+  copy: 
+    src: './files/join-command.txt'
+    dest: '/tmp/join-command.sh'
+    mode: 0777
+- name: Join the node to cluster                                     
+  command: sh /tmp/join-command.sh
+...  

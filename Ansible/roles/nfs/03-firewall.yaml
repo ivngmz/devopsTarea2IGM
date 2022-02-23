@@ -1,0 +1,22 @@
+---
+- name: "Abriendo NFS"
+  ansible.posix.firewalld:
+    service: nfs
+    permanent: yes
+    state: enabled
+- name: "Abriendo rpc-bind"
+  ansible.posix.firewalld:
+    service: rpc-bind
+    permanent: yes
+    state: enabled
+- name: "Abriendo mountd"
+  ansible.posix.firewalld:
+    service: mountd
+    permanent: yes
+    state: enabled
+- name: "Reinicio firewalld"
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: firewalld
+...

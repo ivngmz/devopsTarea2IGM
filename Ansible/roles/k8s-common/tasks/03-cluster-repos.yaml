@@ -1,0 +1,23 @@
+---
+- name: "Copia archivo devel-kubic-libcontainers-stable-cri-o-1.23-1.23.0.repo"
+  ansible.builtin.copy:
+    src:  ../templates/devel-kubic-libcontainers-stable-cri-o-1.23-1.23.0.repo
+    dest: /etc/yum.repos.d/devel-kubic-libcontainers-stable-cri-o-1.23-1.23.0.repo
+    mode: '0644'
+- name: "Copia archivo devel-kubic-libcontainers-stable.repo"
+  ansible.builtin.copy:
+    src:  ../templates/devel-kubic-libcontainers-stable.repo
+    dest: /etc/yum.repos.d/devel-kubic-libcontainers-stable.repo
+    mode: '0644'
+- name: "Copia archivo crio.conf"
+  ansible.builtin.copy:
+    src:  ../templates/crio.conf
+    dest: /etc/modules-load.d/crio.conf
+    mode: '0664'
+  register: result
+- name: "Copia archivo kubernetes.repo"
+  ansible.builtin.copy:
+    src:  ../templates/kubernetes.repo
+    dest: /etc/yum.repos.d/kubernetes.repo
+    mode: '0644'
+...
