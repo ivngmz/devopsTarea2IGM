@@ -1,0 +1,16 @@
+---
+# indicar en playbook vars
+# vars_files:
+#   - "group_vars/configuracion.yaml"
+
+
+- name: creacion de templates
+  template:
+    src: exports.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644   
+  become: true
+
+# se puede hacer algo similar con roles/config/tasks/05-hosts.yaml para etc/hosts

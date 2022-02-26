@@ -1,0 +1,7 @@
+---
+nfs_dir: '/srv/nfs'
+
+master: 'master.acme.es'
+worker1: 'worker1.acme.es'
+worker2: 'worker2.acme.es'
+nfs: 'nfs.acme.es'

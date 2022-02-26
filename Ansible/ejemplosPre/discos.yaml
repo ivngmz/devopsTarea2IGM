@@ -1,0 +1,28 @@
+---
+-name: identifica el primer disco vacio
+ set_fact:
+   disks: "/dev/{{ item.key }}"
+ when:
+   # si el disco está vacio debe tener estas variables vaicas:
+   - not item.value.partitions
+   - not item.value.holders
+   - not item.value.links.uuids
+   - not item.value.links.labels
+   # filtramos resultados por prefijo de discos
+   -item.key | regex ("sd|vd")
+ with_dict: "{{ ansible_devices }}"
+
+- name: mostrar
+  debug: msg="Primer disco vacio"
+  when: disks is defined
+- name:
+  command: "pvcreate {{ disks }}"
+  # community.lvg:
+  #   vg: cs
+  #   pvs: "(dev/vga2,{{ disks }}"
+  become: yes
+- name: "vgextend vg 38 min"
+  command: "vgextend /dev/cs {{ disks }}"
+  become: yes
+  when: ansible_host == nfs
+

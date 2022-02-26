@@ -1,0 +1,12 @@
+---
+-name: cracion de fichero /etc/exports
+template:
+   src: nicTemp.j2
+   dest: /etc/sysconfig/network-scripts/ifcfg-enp0s3
+   owner: root
+   group: root
+   mode: 0644
+   setype: net_conf_t
+ become: true
+   when: ansible_os_family == "RedHat"
+...

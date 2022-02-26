@@ -1,0 +1,8 @@
+---
+# en este caso tira de una lista
+{% for item in allowed_nfs_hosts  %}
+{{ nfs_dir }} {{ item }}({{ allowed_perms }})
+{% endfor %}
+
+# se necseigta tener en group_vars en una lista >> allowed_nfs_hosts: ['master.acme.es',...]
+#                                                  allowed_perms: "rw,sync,root_sqash"

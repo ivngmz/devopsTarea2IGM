@@ -17,7 +17,6 @@
 - name: "Reinicio firewalld"
   systemd:
     state: restarted
-    daemon_reload: yes
     name: firewalld
 - name: "Asegura que br_netfilter está activado"
   modprobe:
@@ -32,6 +31,9 @@
 - name: "Reinicia sysctl, recargando todos los archivos de configuracion"
   shell: sysctl --system
   when: result.changed
+- name: Pausa de 20 segundos
+  pause:
+    seconds: 2
 - name: "Abro puertos de comunicacion entre pods y master"
   firewalld:
     port: "{{ item }}"
@@ -40,6 +42,9 @@
   loop:
     - 8285/tcp
     - 8472/tcp
+- name: Pausa de 20 segundos
+  pause:
+    minutes: 2
 - name: "Reiniciar firewalld"
   systemd:
     name: firewalld
