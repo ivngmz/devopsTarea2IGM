@@ -1,5 +1,9 @@
 ---
-- include: 01-instalar-nfs.yaml       
-- include: 02-configurar-exports.yaml 
-- include: 03-firewall.yaml           
+#- block:
+    - include_tasks: 01-instalar-nfs.yaml       
+    - include_tasks: 02-configurar-exports.yaml 
+    - include_tasks: 03-firewall.yaml
+      # debug:
+      #msg: "Finalizada instalacion rol nfs"    
+      #run_once: true    
 ...

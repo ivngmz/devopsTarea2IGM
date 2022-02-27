@@ -1,7 +1,9 @@
 ---
-- include: '01-firewall-k8s.yaml'
-- include: '02-unswapping.yaml'
-- include: '03-cluster-repos.yaml'
-- include: '04-crio-install.yaml'
-- include: '05-k8s-install.yaml'
+- block:
+    - include_tasks: '01-firewall-k8s.yaml'
+    - include_tasks: '02-cluster-repos.yaml'
+    - include_tasks: '03-crio-install.yaml'
+    - include_tasks: '04-k8s-install.yaml'
+  throttle: 1
+  run_once: true
 ...

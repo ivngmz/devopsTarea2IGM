@@ -1,9 +1,10 @@
 ---
 - name: "Descarga imagenes"
-  command: kubeadm config images pull
+  shell: kubeadm config images pull
 - name: "Inicializa pod network"
-  command: kubeadm init --pod-network-cidr 192.169.0.0/16
-  ignore_errors: yes
+  shell: kubeadm init --pod-network-cidr 192.168.0.0/16
+  register: salida1
+- debug: msg= "{{ salida }}"
   #- name: populate /etc/environment
   #  lineinfile:
   #    dest: "/etc/environment"
@@ -28,7 +29,7 @@
     group: root
     mode: 0600
 - name: "Configuro network provider con Calico Azure"
-  command: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
+  shell: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
   environment:
     KUBECONFIG: '/etc/kubernetes/admin.conf'
 ...

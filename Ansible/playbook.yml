@@ -11,41 +11,30 @@
 #    - { role: role1, become: yes }
 #    - role2
 
-
-#- block:
-#    - name: instalar paquetes
-#      dnf:
-#        name: ['gcc', 'make']
-#        state: present
-#    - name: añadir línea a /etc/hosts
-#      lineinfile:
-#        path: /etc/hosts
-#        line: "192.168.1.200 myhost.mydomain"
-#        state: present
-#  become: yes
-
-- name: "Tareas comunes"
-  hosts: ALL
-  become: true
-  roles: 
-    - config
+#- name: "Tareas comunes"
+#  hosts: ALL
+#  become: true
+#  roles: 
+#    - config
 - name: "Tareas en servidor NFS"  
-  hosts: [NFS]     
-  become: true                
+  hosts: NFS     
+  become: true
+  #gather_facts: false  
   roles:
     - nfs
+
       #- name: "Tareas comunes k8s"  
       #  hosts: [MASTER,WORKERS]
       #  become: true
       #  roles:
       #    - k8s-common
       #- name: "Tareas en master"
-      #  hosts: [MASTER]
+      #  hosts: MASTER
       #  become: true
       #  roles:   
-      #    - k8s-master
+      #     - k8s-master
       #- name: "Tareas en workers"
-      #  hosts: [WORKERS]
+      #  hosts: WORKERS
       #  become: true
       #  roles:
       #    - k8s-workers

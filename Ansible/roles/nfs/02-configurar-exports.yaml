@@ -13,6 +13,12 @@
     daemon_reload: yes
     state: started
     name: nfs-server.service
+  result: salida
+  ansible.builtin.debug:
+    msg: "{{ salida.stdout_lines }}"
 - name: "Recarga exports"
   command: exportfs -r
+  result: salida
+  ansible.builtin.debug:
+    msg: "{{ salida.stdout_lines }}"
 ...        

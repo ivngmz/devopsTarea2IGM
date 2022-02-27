@@ -1,19 +1,10 @@
 ---
-- name: "Cambio de nombre de host"
+- name: Cambio de nombre de host
   hostname:
     name: "{{ inventory_hostname }}"
   when:
     ansible_fqdn != ansible_ssh_host
-- name: "Reinicio de host"
-  become: true
-  shell: shutdown -r && sleep 2
-  async: 1
-  poll: 0
-  ignore_errors: True
-- name: "Esperando fin de reinicio del servidor"
-  pause:
-    seconds: 30
-- name: "Fix /etc/hosts removing the old hostname"
+- name: Sustituye antiguo nombre de host en /etc/hosts
   tags:
     - hosts
   lineinfile:
@@ -23,7 +14,7 @@
     regexp: "^{{ ansible_default_ipv4.address }}"
   when:
     ansible_fqdn != inventory_hostname
-- name: "Validate ansible_fqdn == inventory_hostname"
+- name: Compprueba el cambio
   tags:
     - validate
   assert:

@@ -2,7 +2,6 @@
 - name: Pausa de 20 segundos
   pause:
     seconds: 20
-
 - name: "DNF update previo"
   dnf:
     name:  "*"
@@ -11,9 +10,15 @@
   dnf:
     name: cri-o
     state: latest
+  throttle: 1
+  register: result
+- name: Print return information from the previous task
+  ansible.builtin.debug:
+    var: result
 - name: "Inicia y activa servicio crio"
   ansible.builtin.service:
     name: crio
     enabled: yes
     state: started
+  throttle: 1
 ...

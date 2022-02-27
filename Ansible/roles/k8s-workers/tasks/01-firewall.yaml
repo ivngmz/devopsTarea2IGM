@@ -19,4 +19,7 @@
     mode: 0777
 - name: Join the node to cluster                                     
   command: sh /tmp/join-command.sh
+  register: kubewjoin
+- debug: msg= "{{ kubewjoin.stdout }}"
+- debug: msg= "{{ kubewjoin.stderr }}"
 ...  

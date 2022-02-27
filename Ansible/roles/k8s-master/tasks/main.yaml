@@ -1,7 +1,7 @@
 ---
-#- include_tasks: 01-firewallMaster.yaml
-#- include_tasks: 02-clusterUP.yaml 
-#- include_tasks: 03-ingress.yaml 
+- include_tasks: 01-firewallMaster.yaml
+- include_tasks: 02-clusterUP.yaml 
+- include_tasks: 03-ingress.yaml 
 - include_tasks: 04-registroGetInfo.yaml 
 ...
 

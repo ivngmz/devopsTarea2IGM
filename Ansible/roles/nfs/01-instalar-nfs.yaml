@@ -1,12 +1,14 @@
 ---
-- name: "Instalar nfs-utils"
+- name: "Instalar nfs-utils y net-tools"
   package: 
-    name=nfs-utils
-    state=installed
-- name: "Instalar net-tools"
-  package:
-    name=net-tools
-    state=present
+    name= "{{ item }}"
+    state=latest
+  loop:
+    - nfs-utils
+    - net-tools
+  result: salida
+  ansible.builtin.debug:
+    msg: "{{ salida.stdout_lines }}"
 - name: "Compruebo que ha sido instalado"
   service:
     name: rpcbind
