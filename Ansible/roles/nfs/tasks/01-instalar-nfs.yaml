@@ -1,0 +1,17 @@
+---
+- name: "Instalar nfs-utils y net-tools"
+  dnf: 
+    name: 
+      - nfs-utils
+      - nfs4-acl-tools
+      - wget
+      - net-tools
+    state: latest
+- name: "Compruebo que ha sido instalado"
+  service:
+    name: rpcbind
+    state: started
+    enabled: true
+...
+
+

@@ -12,7 +12,6 @@
     - kubelet
     - kubeadm
     - kubectl
-    #  name: "{{ rpms }}"
 - name: "Inicia y activa servicio kubelet"
   ansible.builtin.service:
     name: kubelet

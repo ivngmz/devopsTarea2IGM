@@ -9,3 +9,4 @@
     post_reboot_delay: 60
     test_command: whoami
   ignore_errors: true
+  throttle: 1

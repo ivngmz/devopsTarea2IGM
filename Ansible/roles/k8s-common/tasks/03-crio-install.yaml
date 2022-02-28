@@ -1,7 +1,4 @@
 ---
-- name: Pausa de 20 segundos
-  pause:
-    seconds: 20
 - name: "DNF update previo"
   dnf:
     name:  "*"

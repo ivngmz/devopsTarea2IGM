@@ -5,20 +5,20 @@
     state: present
     line: "{{ item }}"
   with_items:
-    - '/srv/nfs    192.168.0.115(rw,sync)'
-    - '/srv/nfs    192.168.0.116(rw,sync)'
-    - '/srv/nfs    192.168.0.117(rw,sync)'
+    - '/srv/nfs    192.168.0.215(rw,sync)'
+    - '/srv/nfs    192.168.0.216(rw,sync)'
+    - '/srv/nfs    192.168.0.217(rw,sync)'
 - name: "Reinicia servicio"
   ansible.builtin.systemd:
     daemon_reload: yes
     state: started
     name: nfs-server.service
-  result: salida
-  ansible.builtin.debug:
-    msg: "{{ salida.stdout_lines }}"
 - name: "Recarga exports"
   command: exportfs -r
-  result: salida
+- name: ""
+  command: exportfs -s
+  register: result
+- name: "muestro el resultado de las modificaciones con la salida del comando anterior"
   ansible.builtin.debug:
-    msg: "{{ salida.stdout_lines }}"
+    msg: "{{ result }}"
 ...        

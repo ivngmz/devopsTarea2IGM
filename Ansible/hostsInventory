@@ -4,16 +4,16 @@ ansible_user=aristoteles
 
 [ALL]
 master.acme.es ansible_ssh_host=192.168.0.215
-worker1.acme.es ansible_ssh_host=192.168.0.216
-worker2.acme.es ansible_ssh_host=192.168.0.217
-nfs.acme.es ansible_ssh_host=192.168.0.218
+#worker1.acme.es ansible_ssh_host=192.168.0.216
+#worker2.acme.es ansible_ssh_host=192.168.0.217
+#nfs.acme.es ansible_ssh_host=192.168.0.218
 
 [NFS]
-nfs.acme.es ansible_ssh_host=192.168.0.218
+#nfs.acme.es ansible_ssh_host=192.168.0.218
 
 [WORKERS]
-worker1.acme.es ansible_ssh_host=192.168.0.216
-worker2.acme.es ansible_ssh_host=192.168.0.217
+#worker1.acme.es ansible_ssh_host=192.168.0.216
+#worker2.acme.es ansible_ssh_host=192.168.0.217
 
 [MASTER]
 master.acme.es ansible_ssh_host=192.168.0.215

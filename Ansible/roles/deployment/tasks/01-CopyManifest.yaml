@@ -1,0 +1,16 @@
+---
+- name: "Crear directorio para NFS"
+  file:
+    path: /opt/deployment
+    state: directory
+    owner: aristoteles
+    group: aristoteles
+    mode: 0775
+    recurse: yes
+- name: "Copy Manifest file to master"
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /opt/deployment
+    mode: '0644'
+  with_fileglob: "files/*"
+...

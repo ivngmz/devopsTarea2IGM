@@ -1,0 +1,27 @@
+---
+- name: "Check or install nfs-utils"
+  dnf: 
+    name: nfs-utils
+    state: latest
+- name: "Comprobacion de acceso a ruta compartida en server nfs"
+  shell: showmount -e nfs
+  register: salida
+- name: "Muestro resultado check anterior"
+  ansible.builtin.debug:
+    msg: "{{ salida }}"
+- name: "Monta unidad en máquina huesped"
+  mount:
+    fstype: nfs
+    opts: defaults
+    dump: 0
+    passno: 0
+    state: mounted
+    src: "nfs:/srv/nfs"
+    path: "/srv/nfs"
+- name: "Recarga unidades"
+  ansible.posix.mount:
+    path: /srv/nfs
+    state: remounted
+- name: "  "
+  shell: mount -a   
+...

@@ -16,26 +16,38 @@
 #  become: true
 #  roles: 
 #    - config
-- name: "Tareas en servidor NFS"  
-  hosts: NFS     
-  become: true
-  #gather_facts: false  
-  roles:
-    - nfs
+ 
+      #- name: Tareas en servidor NFS
+      #  hosts: NFS
+      #  become: true
+      #  roles:
+      #    - nfs
+      #
+      #- name: "Montando nfs en servidores"
+      #  hosts: WORKERS
+      #  become: true
+      #  roles:
+      #    - nfs-join
 
       #- name: "Tareas comunes k8s"  
-      #  hosts: [MASTER,WORKERS]
+      #  hosts: MASTER
       #  become: true
       #  roles:
       #    - k8s-common
+      #
       #- name: "Tareas en master"
       #  hosts: MASTER
       #  become: true
       #  roles:   
       #     - k8s-master
-      #- name: "Tareas en workers"
-      #  hosts: WORKERS
-      #  become: true
-      #  roles:
-      #    - k8s-workers
+       #- name: "Tareas en workers"
+       #  hosts: WORKERS
+       #  become: true
+       #  roles:
+       #    - k8s-workers
+- name: "Despliegue simple"
+  hosts: MASTER
+  become: true
+  roles:
+    - deployment
 ...

@@ -1,10 +1,16 @@
 ---
+- name: "Configuro variable persistente"
+  shell: echo 'KUBECONFIG=/etc/kubernetes/admin.conf' >> /etc/environment
 - name: "Descarga imagenes"
   shell: kubeadm config images pull
 - name: "Inicializa pod network"
-  shell: kubeadm init --pod-network-cidr 192.168.0.0/16
+  shell: kubeadm init --pod-network-cidr 192.169.0.0/16
   register: salida1
-- debug: msg= "{{ salida }}"
+  ignore_errors: true
+- name: Pausa de 120 segundos
+  pause:
+    seconds: 120
+- debug: msg= "{{ salida1 }}"
   #- name: populate /etc/environment
   #  lineinfile:
   #    dest: "/etc/environment"
@@ -28,8 +34,20 @@
     owner: root
     group: root
     mode: 0600
+- name: "Instalo tigera operator"
+  shell: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+- name: "Descargo Calico custom-resources.yaml"
+  shell: wget https://docs.projectcalico.org/manifests/custom-resources.yaml -O /root/.kube/custom-resources.yaml
+- name: "Modifico CIDR"
+  shell: sed -i 's/192.168.0.0/192.169.0.0/g' /root/.kube/custom-resources.yaml
+- name: "Levanto configuraciones de custom-resources.yaml"
+  shell: kubectl apply -f /root/.kube/custom-resources.yaml
 - name: "Configuro network provider con Calico Azure"
   shell: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
-  environment:
-    KUBECONFIG: '/etc/kubernetes/admin.conf'
+  # environment:
+  #  KUBECONFIG: '/etc/kubernetes/admin.conf'
+  run_once: true
+- name: Pausa de 120 segundos
+  pause:
+    seconds: 180
 ...

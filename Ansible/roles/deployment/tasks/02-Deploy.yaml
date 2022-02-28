@@ -1,0 +1,6 @@
+---
+- name: "Creo un namespace para el deployment"
+  shell: kubectl create namespace app1
+- name: "Desplegando aplicacion"
+  shell: kubectl apply -f /opt/deployment/ -n app1
+...
