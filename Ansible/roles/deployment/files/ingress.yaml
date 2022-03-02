@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+  namespace: app1
+  labels:
+    app: frontend
+    #  annotations:
+    #      haproxy.org/path-rewrite: "/"
+spec:
+  rules:
+  - host: frontapp.azuretestivngmz.es
+    http:
+      paths:
+      - path: /frontend
+        pathType: "Prefix"
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 80

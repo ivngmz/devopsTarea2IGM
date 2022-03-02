@@ -1,0 +1,10 @@
+---
+- name:
+  dnf:
+    name: epel-release
+    state: installed
+- name: 
+  dnf:
+    name: ansible
+    state: installed
+...

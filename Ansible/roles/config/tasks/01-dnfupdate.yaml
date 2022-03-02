@@ -1,11 +1,11 @@
 ---
-- name: Actualiza los paquetes con dnf
-  dnf: 
-    name: "*"
-    state: latest
-  throttle: 1
-  register: result
-- name: Print return information from the previous task
-  ansible.builtin.debug:
-    var: result
+#- name: Actualiza los paquetes con dnf
+#  dnf: 
+#    name: "*"
+#    state: latest
+# #  throttle: 1
+#  register: result
+#- name: Print return information from the previous task
+#  ansible.builtin.debug:
+#    var: result
 ...

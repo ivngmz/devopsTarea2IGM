@@ -4,9 +4,7 @@
     msg: "Reiniciando de host"
     reboot_command: shutdown -r
     connect_timeout: 5
-    reboot_timeout: 120
+    reboot_timeout: 180
     pre_reboot_delay: 0
     post_reboot_delay: 60
-    test_command: whoami
-  ignore_errors: true
-  throttle: 1
+    test_command: hostname

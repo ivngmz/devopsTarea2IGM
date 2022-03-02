@@ -11,19 +11,12 @@
   pause:
     seconds: 120
 - debug: msg= "{{ salida1 }}"
-  #- name: populate /etc/environment
-  #  lineinfile:
-  #    dest: "/etc/environment"
-  #    state: present
-  #    regexp: "^{{ item.key }}="
-  #    line: "{{ item.key }}={{ item.value}}"
-  #  with_items: "{{ os_environment }}"
 - name: "Crear directorio para configuracion Kuberntetes y uso con perfil root"
   file:
     path: /root/.kube/ 
     state: directory
-    owner: aristoteles
-    group: aristoteles
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     mode: 0774
     recurse: yes
 - name: "Copy archivo conf"
@@ -42,12 +35,10 @@
   shell: sed -i 's/192.168.0.0/192.169.0.0/g' /root/.kube/custom-resources.yaml
 - name: "Levanto configuraciones de custom-resources.yaml"
   shell: kubectl apply -f /root/.kube/custom-resources.yaml
-- name: "Configuro network provider con Calico Azure"
-  shell: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
-  # environment:
-  #  KUBECONFIG: '/etc/kubernetes/admin.conf'
-  run_once: true
 - name: Pausa de 120 segundos
   pause:
     seconds: 180
+- name: "Configuro network provider con Calico Azure"
+  shell: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
+  ignore_errors: true
 ...

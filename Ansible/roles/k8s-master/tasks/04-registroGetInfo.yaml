@@ -10,7 +10,7 @@
     dest: '.join-command.txt'
 - name: "Recupero informacion de conexion de nodos"
   fetch:
-    src: /home/aristoteles/.join-command.txt
+    src: .join-command.txt
     dest: ./files/join-command.txt 
     flat: yes
 ...

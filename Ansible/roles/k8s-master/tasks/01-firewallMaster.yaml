@@ -21,6 +21,5 @@
     permanent: true
     state: enabled
   loop:
-    - 'rule family=ipv4 source address=192.168.0.216/32 accept'
-    - 'rule family=ipv4 source address=192.168.0.217/32 accept'
+    - 'rule family=ipv4 source address=192.168.0.12/32 accept'
 ...

@@ -1,8 +1,4 @@
 ---
-#  - name: "DNF update previo"
-#  dnf:
-#   name:  "*"
-#    state: latest 
 - name: "Instala los demonios de kubernetes"
   dnf:
     name: "{{ item }}"

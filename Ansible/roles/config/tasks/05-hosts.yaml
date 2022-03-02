@@ -5,8 +5,7 @@
     state: present
     line: "{{ item }}"
   with_items:
-    - '192.168.1.215 master kubemaster.acme.es'
-    - '192.168.1.216 node1 kubenode1.acme.es'
-    - '192.168.1.217 node2 kubenode2.acme.es'
-    - '192.168.1.218 nfs nfs.acme.es'
+    - '10.0.1.11 master master.tarea2.unir'
+    - '10.0.1.12 worker1 worker1.tarea2.unir'
+    - '10.0.1.11 master nfs.tarea2.unir'
 ...

@@ -3,8 +3,8 @@
   file:
     path: /opt/deployment
     state: directory
-    owner: aristoteles
-    group: aristoteles
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     mode: 0775
     recurse: yes
 - name: "Copy Manifest file to master"

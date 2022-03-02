@@ -1,11 +1,10 @@
 - name: Copy the join command to server location
   copy:
-    src: './files/join-command.txt'
-    dest: '/tmp/join-command.sh'
-    mode: 0777
+    src: ../../k8s-master/files/join-command.txt
+    dest: /tmp/join-command.sh
+    mode: 0770
   register: copy_join
-- debug: msg= "{{ copy_join.stdout_lines }}"
 - name: Join the node to cluster
   command: sh /tmp/join-command.sh
   register: kubewjoin
-- debug: msg= "{{ kubewjoin.stdout_lines }}"
+  ignore_errors: yes

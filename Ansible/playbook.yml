@@ -11,17 +11,17 @@
 #    - { role: role1, become: yes }
 #    - role2
 
-#- name: "Tareas comunes"
-#  hosts: ALL
-#  become: true
-#  roles: 
-#    - config
+- name: "Tareas comunes"
+  hosts: ALL
+  become: true
+  roles: 
+    - config
  
-      #- name: Tareas en servidor NFS
-      #  hosts: NFS
-      #  become: true
-      #  roles:
-      #    - nfs
+- name: Tareas en servidor NFS
+  hosts: NFS
+  become: true
+  roles:
+    - nfs
       #
       #- name: "Montando nfs en servidores"
       #  hosts: WORKERS
@@ -29,22 +29,27 @@
       #  roles:
       #    - nfs-join
 
-      #- name: "Tareas comunes k8s"  
-      #  hosts: MASTER
-      #  become: true
-      #  roles:
-      #    - k8s-common
-      #
-      #- name: "Tareas en master"
-      #  hosts: MASTER
-      #  become: true
-      #  roles:   
-      #     - k8s-master
-       #- name: "Tareas en workers"
-       #  hosts: WORKERS
+- name: "Tareas comunes k8s"  
+  hosts: [MASTER, WORKERS]
+  become: true
+  roles:
+    - k8s-common
+
+- name: "Tareas en master"
+  hosts: MASTER
+  become: true
+  roles:   
+     - k8s-master
+       #- name: "Ansible en master"
+       #  hosts: MASTER
        #  become: true
        #  roles:
-       #    - k8s-workers
+       #     - ansible
+- name: "Tareas en workers"
+  hosts: WORKERS
+  become: true
+  roles:
+    - k8s-workers
 - name: "Despliegue simple"
   hosts: MASTER
   become: true

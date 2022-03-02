@@ -2,7 +2,7 @@
   file:
     path: /srv/nfs
     state: directory
-    owner: aristoteles
-    group: aristoteles
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     mode: 0775
     recurse: yes

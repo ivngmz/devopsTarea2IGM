@@ -4,5 +4,5 @@
     - include_tasks: '02-cluster-repos.yaml'
     - include_tasks: '03-crio-install.yaml'
     - include_tasks: '04-k8s-install.yaml'
-  throttle: 1
+      #  throttle: 1
 ...
