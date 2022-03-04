@@ -27,18 +27,21 @@
     owner: root
     group: root
     mode: 0600
-- name: "Instalo tigera operator"
-  shell: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
-- name: "Descargo Calico custom-resources.yaml"
-  shell: wget https://docs.projectcalico.org/manifests/custom-resources.yaml -O /root/.kube/custom-resources.yaml
-- name: "Modifico CIDR"
-  shell: sed -i 's/192.168.0.0/192.169.0.0/g' /root/.kube/custom-resources.yaml
-- name: "Levanto configuraciones de custom-resources.yaml"
-  shell: kubectl apply -f /root/.kube/custom-resources.yaml
-- name: Pausa de 120 segundos
+            #- name: "Instalo tigera operator"
+            #  shell: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+            #- name: "Descargo Calico custom-resources.yaml"
+            #  shell: wget https://docs.projectcalico.org/manifests/custom-resources.yaml -O /root/.kube/custom-resources.yaml
+            #- name: "Modifico CIDR"
+            #  shell: sed -i 's/192.168.0.0/192.169.0.0/g' /root/.kube/custom-resources.yaml
+            #- name: "Levanto configuraciones de custom-resources.yaml"
+            #  shell: kubectl apply -f /root/.kube/custom-resources.yaml
+- name: Pausa de 120 segundos parada despues
   pause:
     seconds: 180
+
 - name: "Configuro network provider con Calico Azure"
   shell: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
   ignore_errors: true
+  notify:
+    - Reinicio host
 ...

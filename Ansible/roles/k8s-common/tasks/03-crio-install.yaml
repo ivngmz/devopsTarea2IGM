@@ -1,8 +1,8 @@
 ---
-- name: "DNF update previo"
-  dnf:
-    name:  "*"
-    state: latest 
+#- name: "DNF update previo"
+#  dnf:
+#    name:  "*"
+#    state: latest 
 - name: "Instala paquete cri-o"
   dnf:
     name: cri-o

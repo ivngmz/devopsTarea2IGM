@@ -2,8 +2,8 @@
 ansible_python_interpreter=/usr/bin/python3
 ansible_user=adminDevOps
 #ansible_user=aristoteles
-masterIP=137.117.143.109
-workerIP=20.101.55.122
+masterIP=20.105.205.100
+workerIP=13.95.229.222
 
 
 [ALL]

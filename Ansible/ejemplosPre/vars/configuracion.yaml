@@ -1,7 +1,7 @@
 ---
 nfs_dir: '/srv/nfs'
 
-master: 'master.acme.es'
-worker1: 'worker1.acme.es'
-worker2: 'worker2.acme.es'
+master: 'master-vm.acme.es'
+worker1: 'worker1-vm.acme.es'
+worker2: 'worker2-vm.acme.es'
 nfs: 'nfs.acme.es'

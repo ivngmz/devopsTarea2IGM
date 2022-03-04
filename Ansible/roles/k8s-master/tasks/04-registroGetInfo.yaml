@@ -11,6 +11,6 @@
 - name: "Recupero informacion de conexion de nodos"
   fetch:
     src: .join-command.txt
-    dest: ./files/join-command.txt 
+    dest: ./shared_files/join-command.txt 
     flat: yes
 ...

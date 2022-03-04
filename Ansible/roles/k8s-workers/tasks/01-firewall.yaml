@@ -12,14 +12,4 @@
   systemd:                     
     name: firewalld            
     state: reloaded            
-- name: Copy the join command to server location                     
-  copy: 
-    src: './files/join-command.txt'
-    dest: '/tmp/join-command.sh'
-    mode: 0777
-- name: Join the node to cluster                                     
-  command: sh /tmp/join-command.sh
-  register: kubewjoin
-- debug: msg= "{{ kubewjoin.stdout }}"
-- debug: msg= "{{ kubewjoin.stderr }}"
 ...  

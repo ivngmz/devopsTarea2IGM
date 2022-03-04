@@ -39,7 +39,7 @@
   hosts: MASTER
   become: true
   roles:   
-     - k8s-master
+    - k8s-master
        #- name: "Ansible en master"
        #  hosts: MASTER
        #  become: true
