@@ -1,0 +1,8 @@
+---
+- name: Take out of load balancer pool
+  ansible.builtin.command: pwd
+  delegate_to: 127.0.0.1
+- name: Take out of load balancer pool
+  ansible.builtin.command: sh shared_files/sshConnections.sh
+  delegate_to: 127.0.0.1
+...

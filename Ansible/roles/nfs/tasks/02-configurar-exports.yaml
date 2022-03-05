@@ -3,14 +3,12 @@
   lineinfile:
     path: /etc/exports
     state: present
-    line: "{{ item }}"
-  with_items:
-    - '/srv/nfs    192.168.1.11(rw,sync)'
-    - '/srv/nfs    192.168.1.12(rw,sync)'
+    line: "{{ nfs_dir }}{{ item }}"
+  with_items: groups['ALL'] 
 - name: "Reinicia servicio"
   ansible.builtin.systemd:
     daemon_reload: yes
-    state: started
+    state: enabled
     name: nfs-server.service
 - name: "Recarga exports"
   command: exportfs -r

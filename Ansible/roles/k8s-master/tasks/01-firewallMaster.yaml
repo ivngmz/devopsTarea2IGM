@@ -17,9 +17,8 @@
   when: result is changed
 - name: "Reglas de acceso de los Workers"
   firewalld:
-    rich_rule: "{{ item }}"
+    rich_rule: "rule family=ipv4 source address={{ item }}/32 accept"
     permanent: true
     state: enabled
-  loop:
-    - 'rule family=ipv4 source address=192.168.1.12/32 accept'
+  with_items: groups['WORKERS']
 ...

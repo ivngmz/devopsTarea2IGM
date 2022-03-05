@@ -9,3 +9,6 @@ workerip=$(az vm list-ip-addresses --resource-group KUBERNETES_RG --name worker1
 
 # Modificar inventario
 
+sed -i "s/^MasterIP=.*/MasterIP=$masterip/g" test
+sed -i "s/^MasterIP=.*/Worker1=$workerip/g" test
+

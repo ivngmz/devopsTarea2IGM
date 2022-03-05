@@ -2,8 +2,7 @@
 - block:
   - include_tasks: 01-firewallMaster.yaml
   - include_tasks: 02-clusterUP.yaml 
-  - include_tasks: 03-ingress.yaml 
-  - include_tasks: 04-registroGetInfo.yaml 
+  - include_tasks: 03-registroGetInfo.yaml 
   environment:
     KUBECONFIG: '/etc/kubernetes/admin.conf'
 ...

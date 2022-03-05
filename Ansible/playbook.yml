@@ -1,15 +1,16 @@
 ---
-# ANSIBLE_STDOUT_CALLBACK=debug ansible-playbook
-
-#vars_files:
-#  - "group_vars/instalar.yaml"
-
 #- name:  ejemplo de escalación de privilegios para todas las tareas
 #  hosts: all
 #  gather_facts: false
 #  roles:
 #    - { role: role1, become: yes }
 #    - role2
+
+
+- name: "Tareas en local"   
+  hosts: LOCALHOST               
+  roles: 
+    - local-role               
 
 - name: "Tareas comunes"
   hosts: ALL
@@ -22,12 +23,12 @@
   become: true
   roles:
     - nfs
-      #
-      #- name: "Montando nfs en servidores"
-      #  hosts: WORKERS
-      #  become: true
-      #  roles:
-      #    - nfs-join
+
+- name: "Montando nfs en servidores"
+  hosts: WORKERS
+  become: true
+  roles:
+    - nfs-join
 
 - name: "Tareas comunes k8s"  
   hosts: [MASTER, WORKERS]
@@ -40,16 +41,19 @@
   become: true
   roles:   
     - k8s-master
-       #- name: "Ansible en master"
-       #  hosts: MASTER
-       #  become: true
-       #  roles:
-       #     - ansible
+
 - name: "Tareas en workers"
   hosts: WORKERS
   become: true
   roles:
     - k8s-workers
+
+- name: "Tareas en workers"
+  hosts: MASTER
+  become: true
+  roles:
+    - k8s-master-final
+
 - name: "Despliegue simple"
   hosts: MASTER
   become: true

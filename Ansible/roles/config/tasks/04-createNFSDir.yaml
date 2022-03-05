@@ -1,6 +1,6 @@
 - name: "Crear directorio para NFS"
   file:
-    path: /srv/nfs
+    path: "{{ nfs_dir }}"
     state: directory
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
