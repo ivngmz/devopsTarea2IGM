@@ -1,2 +1,8 @@
-ssh adminDevOps@13.95.229.222 -o "StrictHostKeyChecking no"
-ssh adminDevOps@20.105.205.100 -o "StrictHostKeyChecking no"
+#!/bin/bash
+
+workdir=`pwd`
+
+masterip=`grep 'masterIP=' $(echo $workdir"/inventory") | cut -d '=' -f2`
+workerip=`grep 'workerIP=' $(echo $workdir"/inventory") | cut -d '=' -f2`
+ssh adminDevOps@$masterip -o "StrictHostKeyChecking no" exit
+ssh adminDevOps@$workerip -o "StrictHostKeyChecking no" exit

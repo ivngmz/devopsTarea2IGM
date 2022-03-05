@@ -2,26 +2,26 @@
 ansible_python_interpreter=/usr/bin/python3
 ansible_user=adminDevOps
 #ansible_user=aristoteles
-masterIP=20.105.205.100
-workerIP=13.95.229.222
+masterIP=20.123.202.19
+workerIP=20.123.201.216
 
 
 [ALL]
 #master.acme.es ansible_ssh_host=192.168.0.215
 master-vm ansible_ssh_host="{{masterIP}}"
-worker1 ansible_ssh_host="{{workerIP}}"
+worker1-vm ansible_ssh_host="{{workerIP}}"
 #worker1.acme.es ansible_ssh_host=192.168.0.216
 #worker2.acme.es ansible_ssh_host=192.168.0.217
 #nfs.acme.es ansible_ssh_host=192.168.0.218
 
 [NFS]
 #nfs.acme.es ansible_ssh_host=192.168.0.218
-nfs ansible_ssh_host="{{masterIP}}"
+master-vm ansible_ssh_host="{{masterIP}}"
 
 [WORKERS]
 #worker1.acme.es ansible_ssh_host=192.168.0.216
 #worker2.acme.es ansible_ssh_host=192.168.0.217
-worker1 ansible_ssh_host="{{workerIP}}"
+worker1-vm ansible_ssh_host="{{workerIP}}"
 
 [MASTER]
 #master.acme.es ansible_ssh_host=192.168.0.215

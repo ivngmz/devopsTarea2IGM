@@ -1,1 +1,1 @@
-kubeadm join 192.168.1.11:6443 --token xpu6vb.rpzpkoozujjmnsdh --discovery-token-ca-cert-hash sha256:f8035e8cf906f41bef9f138eafc20ac727d78c4f9e30cc635ce2ce8a307e7088 
+kubeadm join 192.168.1.11:6443 --token oq75mq.js4x1q0dltvsxri3 --discovery-token-ca-cert-hash sha256:4f4e0e53e23076ed76c644d08c32de277bdcde155a3737c5b1999a94404758af 
