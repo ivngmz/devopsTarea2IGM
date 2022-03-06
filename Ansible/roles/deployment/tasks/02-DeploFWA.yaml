@@ -1,0 +1,11 @@
+---
+- name: "Creo un namespace para el deployment"
+  shell: "kubectl create namespace {{ namespace }}"
+  ignore_errors: true
+- name: "Desplegando aplicacion"                                    
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix }}/first-routed-webapp.yaml -n {{ namespace }}"
+- name: "Desplegando aplicacion"                  
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix }}/ingress.yaml -n {{ namespace }}"
+- name: "Desplegando aplicacion"
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix }}/configMap.yaml -n {{ namespace }}"
+...

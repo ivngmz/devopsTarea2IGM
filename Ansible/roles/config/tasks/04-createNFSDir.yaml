@@ -4,5 +4,5 @@
     state: directory
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
-    mode: 0775
+    mode: 0777
     recurse: yes

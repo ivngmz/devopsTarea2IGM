@@ -2,8 +2,8 @@
 ansible_python_interpreter=/usr/bin/python3
 ansible_user=adminDevOps
 #ansible_user=aristoteles
-masterIP=20.86.171.69
-worker1IP=20.105.136.62
+masterIP=40.68.127.179
+worker1IP=20.105.160.188
 current_user=aristoteles
 
 [LOCALHOST]
@@ -11,21 +11,21 @@ localhost ansible_ssh_host=127.0.0.1 ansible_connection=local ansible_ssh_user="
 
 [ALL]
 #master.acme.es ansible_ssh_host=192.168.0.215
-master-vm.tarea2.unir ansible_ssh_host="{{masterIP}}"
-worker1-vm.tarea2.unir ansible_ssh_host="{{worker1IP}}"
+master-vm.tarea2.unir ansible_ssh_host="{{masterIP}}" ansible_default_ipv4=192.168.1.11
+worker1-vm.tarea2.unir ansible_ssh_host="{{worker1IP}}" ansible_default_ipv4=192.168.1.12
 #worker1.acme.es ansible_ssh_host=192.168.0.216
 #worker2.acme.es ansible_ssh_host=192.168.0.217
 #nfs.acme.es ansible_ssh_host=192.168.0.218
 
 [NFS]
 #nfs.acme.es ansible_ssh_host=192.168.0.218
-master-vm.tarea2.unir ansible_ssh_host="{{masterIP}}"
+master-vm.tarea2.unir ansible_ssh_host="{{masterIP}}" ansible_default_ipv4=192.168.1.11
 
 [WORKERS]
 #worker1.acme.es ansible_ssh_host=192.168.0.216
 #worker2.acme.es ansible_ssh_host=192.168.0.217
-worker1-vm.tarea2.unir ansible_ssh_host="{{worker1IP}}"
+worker1-vm.tarea2.unir ansible_ssh_host="{{worker1IP}}" ansible_default_ipv4=192.168.1.12
 
 [MASTER]
 #master.acme.es ansible_ssh_host=192.168.0.215
-master-vm.tarea2.unir ansible_ssh_host="{{masterIP}}"
+master-vm.tarea2.unir ansible_ssh_host="{{masterIP}}" ansible_default_ipv4=192.168.1.11

@@ -1,7 +1,9 @@
 ---
+- name: Instalar elinks para pruebas
+  shell: yum install --enablerepo=powertools elinks -y
 - name: "Crear directorio para NFS"
   file:
-    path: /opt/deployment
+    path: "{{ appWorkDir }}{{ appPrefix }}/"
     state: directory
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
@@ -10,7 +12,7 @@
 - name: "Copy Manifest file to master"
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: /opt/deployment
+    dest: "{{ appWorkDir }}{{ appPrefix }}/"
     mode: '0644'
-  with_fileglob: "files/*"
+  with_fileglob: "files/{{ appPrefix }}/*"
 ...

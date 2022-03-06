@@ -1,17 +1,22 @@
 ---
 - name: "Check or install nfs-utils"
   dnf: 
-  name: {nfs-utils, nfs4-acl-tools}
+    name: 
+      - nfs-utils
+      - nfs4-acl-tools
     state: latest
+- name: "Muestra si existe conectividad con master"
+  shell: "showmount -a 192.168.1.11"
+- name: "Confirma descubrimiento de exports"
+  shell: "showmount -e 192.168.1.11"
 - name: "Monta unidad en máquina huesped"
-  mount:
+  ansible.posix.mount:
     fstype: nfs
-    opts: defaults
-    dump: 0
-    passno: 0
+    opts: rw,sync
     state: mounted
-    src: "nfs:/srv/nfs"
+    src: "192.168.1.11:/srv/nfs"
     path: "/srv/nfs"
+    boot: yes
   register: salida
 - name: "Muestro resultado check anterior"
   ansible.builtin.debug:

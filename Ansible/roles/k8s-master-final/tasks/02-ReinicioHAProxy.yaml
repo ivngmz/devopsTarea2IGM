@@ -2,8 +2,8 @@
 - name: Copia script para ejecucion en destino
   copy:
     src: files/outsiderPods.sh
-    dst: '/home/"{{ ansible_user }}"/'
+    dest: "/home/{{ ansible_user }}/"
     mode: '0755'
-- name: Ejecuta script
-  shell: 'sh /home/"{{ ansible_user }}"/outsiderPods.sh'
+    #- name: Ejecuta script
+    #  shell: "sh /home/"{{ ansible_user }}/outsiderPods.sh"
 ...

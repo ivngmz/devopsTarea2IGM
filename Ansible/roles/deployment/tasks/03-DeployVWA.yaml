@@ -1,0 +1,17 @@
+---
+- name: "Creo un namespace para el deployment"
+  shell: "kubectl create namespace {{ namespace }}"
+  ignore_errors: true
+- name: "Desplegando aplicacion"
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix }}/nfs-pv.yaml"
+- name: "Desplegando aplicacion"
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix }}/nfs-pvc.yaml"
+- name: "Desplegando aplicacion"
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix }}/webapp-volumes.yaml -n {{ namespace }}"
+- name: "Copy Manifest file to master"
+  ansible.builtin.copy:
+    src: "{{ appWorkDir }}{{ appPrefix }}/index.php"
+    dest: "{{ nfs_dir }}/"
+    mode: '0644'
+    remote_src: yes
+...

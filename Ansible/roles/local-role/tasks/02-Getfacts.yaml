@@ -1,0 +1,6 @@
+---
+- name: Recupera informacion de facts para ser usada 
+  ansible.builtin.command: "ansible {{ item }} -m setup > facts/{{ item }}.json"
+  delegate_to: 127.0.0.1                                
+  register: resultado                                    
+...

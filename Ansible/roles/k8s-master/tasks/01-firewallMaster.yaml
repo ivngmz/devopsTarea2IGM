@@ -1,4 +1,9 @@
 ---
+- name: Gather facts from workers      
+  setup:                               
+  delegate_to: "{{item}}"              
+  delegate_facts: True                 
+  with_items: "{{ groups['WORKERS'] }}"
 - name: "Abrir puertos firewall"
   firewalld:
     port: "{{ item }}"
@@ -17,8 +22,12 @@
   when: result is changed
 - name: "Reglas de acceso de los Workers"
   firewalld:
-    rich_rule: "rule family=ipv4 source address={{ item }}/32 accept"
+    rich_rule: "rule family=ipv4 source address={{ hostvars[item].ansible_default_ipv4.address }}/32 accept"
     permanent: true
     state: enabled
-  with_items: groups['WORKERS']
+  with_items: "{{ groups['WORKERS'] }}"
+  register: salida
+- name: "Muestro resultado check anterior" 
+  ansible.builtin.debug:                   
+    msg: "{{ salida }}"                    
 ...

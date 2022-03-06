@@ -1,2 +1,5 @@
 ---
 nfs_dir: '/srv/nfs'
+appWorkDir: /opt/deployment/
+appPrefix: webapp-volumes 
+namespace: webapp-volumes

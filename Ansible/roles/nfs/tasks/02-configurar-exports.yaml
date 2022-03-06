@@ -1,15 +1,29 @@
 ---
-- name: "Añadir a exports"
-  lineinfile:
-    path: /etc/exports
-    state: present
-    line: "{{ nfs_dir }}{{ item }}"
-  with_items: groups['ALL'] 
+- name: Gather facts from workers
+  setup: 
+  delegate_to: "{{item}}"
+  delegate_facts: True
+  with_items: "{{ groups['WORKERS'] }}"
+  #- name: "Añadir a exports"
+  #  lineinfile:
+  #    path: /etc/exports
+  #    state: present
+  #    line: "{{ nfs_dir }} {{ item }}(rw,sync)"
+  #  with_items: "{{ groups['ALL'] }}" 
 - name: "Reinicia servicio"
   ansible.builtin.systemd:
     daemon_reload: yes
-    state: enabled
+    state: restarted
+    enabled: yes
     name: nfs-server.service
+- name: creacion de templates
+  template:
+    src: exportsTemp.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+  become: true
 - name: "Recarga exports"
   command: exportfs -r
 - name: ""
