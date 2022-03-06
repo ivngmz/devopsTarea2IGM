@@ -7,10 +7,10 @@
 #    - role2
 
 
-- name: "Tareas en local"   
-  hosts: LOCALHOST               
-  roles: 
-    - local-role               
+#- name: "Tareas en local"   
+#  hosts: LOCALHOST               
+#  roles: 
+#    - local-role               
 
 - name: "Tareas comunes"
   hosts: ALL

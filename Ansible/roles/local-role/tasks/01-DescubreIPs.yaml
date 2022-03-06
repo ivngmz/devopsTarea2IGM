@@ -1,8 +1,13 @@
 ---
-- name: Take out of load balancer pool
+- name: Ejecuta comando de prueba para validar conectividad
   ansible.builtin.command: pwd
   delegate_to: 127.0.0.1
-- name: Take out of load balancer pool
-  ansible.builtin.command: sh shared_files/sshConnections.sh
+- name: Ejecuta comando local en Cloud shell para recuperar las nuevas IPS
+  ansible.builtin.command: sh -x shared_files/checkIP.sh
   delegate_to: 127.0.0.1
+  register: resultado
+- name: Realia una primera conexion de prueba para grabar máquina en knownhosts
+  ansible.builtin.command: sh -x shared_files/sshConnections.sh
+  delegate_to: 127.0.0.1
+  register: resultado
 ...
