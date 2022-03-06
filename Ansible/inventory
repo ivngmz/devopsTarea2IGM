@@ -12,7 +12,7 @@ localhost ansible_ssh_host=127.0.0.1 ansible_connection=local ansible_ssh_user="
 [ALL]
 #master.acme.es ansible_ssh_host=192.168.0.215
 master-vm.tarea2.unir ansible_ssh_host="{{masterIP}}"
-worker1-vm.tarea2.unir ansible_ssh_host="{{workerIP}}"
+worker1-vm.tarea2.unir ansible_ssh_host="{{worker1IP}}"
 #worker1.acme.es ansible_ssh_host=192.168.0.216
 #worker2.acme.es ansible_ssh_host=192.168.0.217
 #nfs.acme.es ansible_ssh_host=192.168.0.218
@@ -24,7 +24,7 @@ master-vm.tarea2.unir ansible_ssh_host="{{masterIP}}"
 [WORKERS]
 #worker1.acme.es ansible_ssh_host=192.168.0.216
 #worker2.acme.es ansible_ssh_host=192.168.0.217
-worker1-vm.tarea2.unir ansible_ssh_host="{{workerIP}}"
+worker1-vm.tarea2.unir ansible_ssh_host="{{worker1IP}}"
 
 [MASTER]
 #master.acme.es ansible_ssh_host=192.168.0.215
