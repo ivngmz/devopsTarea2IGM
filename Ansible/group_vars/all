@@ -3,4 +3,6 @@ nfs_dir: '/srv/nfs'
 appWorkDir: /opt/deployment/
 appPrefix: webapp-volumes 
 namespace: webapp-volumes
+appPrefix1: apirest
+namespace1: apirest
 accessPort: 31186

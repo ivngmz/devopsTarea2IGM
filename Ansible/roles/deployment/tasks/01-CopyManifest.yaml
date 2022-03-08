@@ -15,4 +15,18 @@
     dest: "{{ appWorkDir }}{{ appPrefix }}/"
     mode: '0644'
   with_fileglob: "files/{{ appPrefix }}/*"
+- name: "Crear directorio para NFS"           
+  file:                                       
+    path: "{{ appWorkDir }}{{ appPrefix1 }}/"  
+    state: directory                          
+    owner: "{{ ansible_user }}"               
+    group: "{{ ansible_user }}"               
+    mode: 0775                                
+    recurse: yes                              
+- name: "Copy Manifest file to master"        
+  ansible.builtin.copy:                       
+    src: "{{ item }}"                         
+    dest: "{{ appWorkDir }}{{ appPrefix1 }}/"  
+    mode: '0644'                              
+  with_fileglob: "files/{{ appPrefix1 }}/*"    
 ...

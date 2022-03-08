@@ -1,21 +1,7 @@
 ---                                                         
-- name: "Creo un namespace para el deployment"              
-  shell: "kubectl create namespace simplespringapprest"         
-  ignore_errors: true                                       
-- name: "Crear directorio para NFS"               
-  file:                                           
-    path: "/opt/deployment/apirest"      
-    state: directory                              
-    owner: "{{ ansible_user }}"                   
-    group: "{{ ansible_user }}"                   
-    mode: 0775                                    
-    recurse: yes                                  
-- name: "Copy Manifest file to master"            
-  ansible.builtin.copy:                           
-    src: "{{ item }}"                             
-    dest: "/opt/deployment/apirest/"      
-    mode: '0644'                                  
-  with_fileglob: "files/apirest/apirest.yaml"        
-- name: "Desplegando aplicacion"                            
-  shell: "kubectl apply -f /opt/deployment/apirest/apirest.yaml
+- name: "Creo un namespace para el deployment"                                                    
+  shell: "kubectl create namespace {{ namespace1 }}"                                               
+  ignore_errors: true                                                                             
+- name: "Desplegando aplicacion"                                                                  
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix1 }}/apirest.yaml"                           
 ...                                                         
