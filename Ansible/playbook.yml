@@ -13,42 +13,42 @@
 ##  roles: 
 ##    - local-role               
 
-#- name: "Tareas comunes"
-#  hosts: ALL
-#  become: true
-#  roles: 
-#    - config
-#
-#- name: Tareas en servidor NFS
-#  gather_facts: true
-#  hosts: MASTER
-#  become: true
-#  roles:
-#    - nfs
-#
-#- name: "Montando nfs en servidores"
-#  hosts: WORKERS
-#  become: true
-#  roles:
-#    - nfs-join
-#
-#- name: "Tareas comunes k8s"  
-#  hosts: [MASTER, WORKERS]
-#  become: true
-#  roles:
-#    - k8s-common
-#
-#- name: "Tareas en master"
-#  hosts: MASTER
-#  become: true
-#  roles:   
-#    - k8s-master
-#
-#- name: "Tareas en workers"
-#  hosts: WORKERS
-#  become: true
-#  roles:
-#    - k8s-workers
+- name: "Tareas comunes"
+  hosts: ALL
+  become: true
+  roles: 
+    - config
+
+- name: Tareas en servidor NFS
+  gather_facts: true
+  hosts: MASTER
+  become: true
+  roles:
+    - nfs
+
+- name: "Montando nfs en servidores"
+  hosts: WORKERS
+  become: true
+  roles:
+    - nfs-join
+
+- name: "Tareas comunes k8s"  
+  hosts: [MASTER, WORKERS]
+  become: true
+  roles:
+    - k8s-common
+
+- name: "Tareas en master"
+  hosts: MASTER
+  become: true
+  roles:   
+    - k8s-master
+
+- name: "Tareas en workers"
+  hosts: WORKERS
+  become: true
+  roles:
+    - k8s-workers
 
 - name: "Tareas  finales en master"
   hosts: MASTER

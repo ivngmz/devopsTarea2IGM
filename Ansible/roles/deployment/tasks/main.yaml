@@ -2,4 +2,5 @@
 - block:
   - include_tasks: 01-CopyManifest.yaml
   - include_tasks: 03-DeployVWA.yaml
+  - include_tasks: 04-DeployAPI.yaml 
 ...
