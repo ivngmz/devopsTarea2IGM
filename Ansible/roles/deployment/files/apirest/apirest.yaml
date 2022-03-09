@@ -111,4 +111,3 @@ metadata:
 data:
   servers-increment: "42"
   ssl-redirect: "OFF"
-
