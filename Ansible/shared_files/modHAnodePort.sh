@@ -28,12 +28,13 @@ fi
 
 # Almaceno IP pública
 
-echo "\npublicIP: " $nodeIP >> $srcDataFile
+echo ""
+echo "publicIP: " $nodeIP >> $srcDataFile
 
 # Extraigo dato de configuracion actual terraform
 currentfileIP=`grep -n destination_address_prefix $tfFile | grep 30 | cut -d '"' -f2`
 
 # Realizo modificacion de IP en archivo de terraform según nodo detectado
-sed -i -E '27,31 s/'"$currentfileIP"'/'"$nodeIP"'/g' $tfFile
+sed -i -E '27,31 s/'$currentfileIP'/'$nodeIP'/g' $tfFile
 
 
