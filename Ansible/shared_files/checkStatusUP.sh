@@ -11,5 +11,12 @@ destinationIP=`grep 'publicIP:' $srcDataFile | awk '{print $2}'`
 nodeport=`grep 'nodeport' $srcDataFile | awk '{print $2}'`
 resource=`grep -A20 'kind: Ingress' $file | grep "path: " | awk '{print $3}' | cut -d '"' -f 2`
 
-# Realizo prueba de conexion
-curl -I -H "Host: $domain" "http://${destinationIP}:${nodeport}${resource}"
+# Realizo prueba de conexion - Esto debería ejecutarse correctamente si se pudiera forzar en local terraform desde el mismo playbook.
+# curl -I -H "Host: $domain" "http://${destinationIP}:${nodeport}${resource}"
+
+# Muestro URLs de acceso:
+echo "Por favor habilite en la consola de azure el puerto indicado: " $nodeport
+echo "Es necesario relacionar en fichero hosts: " $domain " " $destinationIP
+echo "La URL de acceso:"
+echo "http://"${domain}:${nodeport}${resource}
+echo "También se puede utilizar: curl -I -H \"Host: "$domain"\" \"http://"${destinationIP}:${nodeport}${resource}\"

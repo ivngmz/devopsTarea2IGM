@@ -50,17 +50,18 @@
 #  roles:
 #    - k8s-workers
 
-#- name: "Tareas  finales en master"
-#  hosts: MASTER
-#  become: true
-#  roles:
-#    - k8s-master-final
+- name: "Tareas  finales en master"
+  hosts: MASTER
+  become: true
+  roles:
+    - k8s-master-final
 
-# - name: "Despliegue simple"
-#   hosts: MASTER
-#   become: true
-#   roles:
-#     - deployment
+- name: "Despliegue simple"
+  hosts: MASTER
+  become: true
+  roles:
+    - deployment
+
 - name: "Checkeo posterior"
   hosts: LOCALHOST
   roles:
