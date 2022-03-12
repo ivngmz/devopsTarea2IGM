@@ -8,6 +8,7 @@
     - kubelet
     - kubeadm
     - kubectl
+
 - name: "Inicia y activa servicio kubelet"
   ansible.builtin.service:
     name: kubelet

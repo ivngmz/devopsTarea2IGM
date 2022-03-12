@@ -6,3 +6,21 @@
     group: "{{ ansible_user }}"
     mode: 0777
     recurse: yes
+
+- name: "Crear directorio para NFS mysql"
+  file:
+    path: "{{ mysql_dir }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0777
+    recurse: yes
+
+- name: "Crear directorio para NFS wordpress"
+  file:
+    path: "{{ wordpress_dir }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0777
+    recurse: yes

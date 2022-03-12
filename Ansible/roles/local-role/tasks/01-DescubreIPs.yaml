@@ -1,13 +1,16 @@
 ---
-- name: Ejecuta comando de prueba para validar conectividad
+- name: "Ejecuta comando de prueba para validar conectividad"
   ansible.builtin.command: pwd
   delegate_to: 127.0.0.1
-- name: Ejecuta comando local en Cloud shell para recuperar las nuevas IPS
+  become_user: "{{ current_user }}"
+- name: "Ejecuta comando local en Cloud shell para recuperar las nuevas IPS"
   ansible.builtin.command: sh -x shared_files/checkIP.sh
   delegate_to: 127.0.0.1
+  become_user: "{{ current_user }}"
   register: resultado
-- name: Realia una primera conexion de prueba para grabar máquina en knownhosts
+- name: "Realiza una primera conexion de prueba para grabar máquina en knownhosts"
   ansible.builtin.command: sh -x shared_files/sshConnections.sh
   delegate_to: 127.0.0.1
+  become_user: "{{ current_user }}"
   register: resultado
 ...

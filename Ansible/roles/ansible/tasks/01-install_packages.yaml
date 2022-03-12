@@ -1,21 +1,21 @@
 ---
-- name: Actualiza los paquetes con dnf                 
+- name: "Actualiza los paquetes con dnf"
   dnf:                                                 
     name: "*"                                          
     state: latest                                      
   register: result                                     
-- name: Print return information from the previous task
+- name: "Imprime informacion de la tarea anterior"
   ansible.builtin.debug:                               
     var: result                                        
-- name: install python3
+- name: "Instala Python"
   dnf:
     name: python3
     state: installed
-- name:
+- name: "Instala Epel-release"
   dnf:
     name: epel-release
     state: installed
-- name: 
+- name: "Instala Ansible"
   dnf:
     name: ansible
     state: installed

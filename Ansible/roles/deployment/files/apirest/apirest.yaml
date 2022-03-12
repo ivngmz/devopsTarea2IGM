@@ -1,39 +1,9 @@
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: simplespringapprest
-  namespace: simplespringapprest
-  labels:
-    app: simplespringapprest
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: simplespringapprest
-  template:
-    metadata:
-      labels:
-        app: simplespringapprest
-    spec:
-      containers:
-      - name: simplespringapprest
-        image: ivaner/springapprest
-        ports:
-        - containerPort: 8080
-        readinessProbe:
-          httpGet:
-            path: /greeting
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          successThreshold: 1
----
 apiVersion: v1
 kind: Service
 metadata:
     name: resty-service
-    namespace: simplespringapprest
+    namespace: apirest
 spec:
     selector:
       app: simplespringapprest
@@ -47,7 +17,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rest-ingress
-  namespace: simplespringapprest
+  namespace: apirest
   labels:
     app: simplespringapprest
   annotations:
@@ -57,13 +27,6 @@ spec:
   - host: springboot.unir
     http:
       paths:
-      - path: "/"
-        pathType: "Prefix"
-        backend:
-          service:
-            name: resty-service
-            port:
-              number: 80
       - path: "/greeting"
         pathType: "Prefix"
         backend:
@@ -71,13 +34,12 @@ spec:
             name: resty-service
             port:
               number: 80
-
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: simplespringapprest
-  namespace: simplespringapprest
+  namespace: apirest
   labels:
     app: simplespringapprest
 spec:
@@ -107,7 +69,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: haproxy-configmap
-  namespace: simplespringapprest
+  namespace: apirest
 data:
   servers-increment: "42"
   ssl-redirect: "OFF"

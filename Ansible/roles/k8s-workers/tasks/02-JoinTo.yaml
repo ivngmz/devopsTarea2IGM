@@ -1,10 +1,11 @@
-- name: Copio script para asociar el nodo
+- name: "Copio script para asociar el nodo"
   copy:
     src: ./shared_files/join-command.txt
     dest: /tmp/join-command.sh
     mode: 0770
   register: copy_join
-- name: Vinculo un nuevo nodo al cluster
+
+- name: "Vinculo un nuevo nodo al cluster"
   command: sh /tmp/join-command.sh
   register: kubewjoin
   ignore_errors: yes

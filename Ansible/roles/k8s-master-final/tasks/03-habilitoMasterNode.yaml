@@ -1,0 +1,19 @@
+- name: "Configura el nodo master para actuar como worker"
+  shell: kubectl taint nodes master-vm.tarea2.unir node-role.kubernetes.io/master-
+
+- name: "Extraigo el valor del puerto de haproxy para acceso desde cliente"
+  shell: "kubectl get svc haproxy-kubernetes-ingress -n haproxy-controller -o json | jq '.spec.ports[0].nodePort'"
+  register: nodeport
+
+- name: "Copio la salida anterior a archivo local"
+  copy:
+    content: "{{ nodeport.stdout }}"
+    dest: "shared_files/nodeport"
+  delegate_to: localhost
+  become_user: "{{ current_user }}"
+
+- name: "Confirmo firewalld"
+  systemd:
+    name: firewalld
+    state: started
+  when: result is changed

@@ -1,0 +1,19 @@
+- name: "Prueba de conexion a través de ingress contra apirest"
+  shell: sh shared_files/checkStatusUP.sh roles/deployment/files/apirest/apirest.yaml
+  delegate_to: 127.0.0.1
+  become_user: "{{ current_user }}"
+  register: testout
+
+- name: "Muestro resultado check anterior"
+  ansible.builtin.debug:
+    msg: "{{ testout }}"
+
+- name: "Prueba de conexion a través de ingress contra volumes"
+  shell: sh shared_files/checkStatusUP.sh roles/deployment/files/webapp-volumes/webapp-volumes.yaml
+  delegate_to: 127.0.0.1
+  become_user: "{{ current_user }}"
+  register: testout
+
+- name: "Muestro resultado check anterior"
+  ansible.builtin.debug:
+    msg: "{{ testout }}"

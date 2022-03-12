@@ -1,0 +1,15 @@
+---
+- name: "Creo un namespace para el deployment"
+  shell: "kubectl create namespace {{ namespace2 }}"
+  ignore_errors: true
+- name: "Desplegando aplicacion"
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix2 }}/01-mysqlvolume.yaml -n {{ namespace2 }}"
+- name: "Desplegando aplicacion"
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix2 }}/02-wordpressvolume.yaml -n {{ namespace2 }}"
+- name: "Desplegando aplicacion"
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix2 }}/03-mysql.yaml -n {{ namespace2 }}"
+- name: "Desplegando aplicacion"
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix2 }}/04-wordpress.yaml -n {{ namespace2 }}"
+- name: "Desplegando aplicacion"
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix2 }}/05-ingresswp.yaml -n {{ namespace2 }}"
+...

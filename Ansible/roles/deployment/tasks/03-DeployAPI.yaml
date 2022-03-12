@@ -1,0 +1,7 @@
+---                                                         
+- name: "Creo un namespace para el deployment"                                                    
+  shell: "kubectl create namespace {{ appPrefix1 }}"                                               
+  ignore_errors: true                                                                             
+- name: "Desplegando aplicacion"                                                                  
+  shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix1 }}/apirest.yaml"                           
+...                                                         

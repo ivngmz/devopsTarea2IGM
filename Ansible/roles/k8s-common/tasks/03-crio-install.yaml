@@ -1,16 +1,19 @@
 ---
+# Deshabilito tras haber comprobado que no es necesario por ahorro de tiempo de ejecucion. Está testeado
 #- name: "DNF update previo"
 #  dnf:
 #    name:  "*"
 #    state: latest 
+
 - name: "Instala paquete cri-o"
   dnf:
     name: cri-o
     state: latest
-  register: result
-- name: Print return information from the previous task
+  register: resultado
+- name: "Muestro salida de ejecucion"
   ansible.builtin.debug:
-    var: result
+    var: resultado
+
 - name: "Inicia y activa servicio crio"
   ansible.builtin.service:
     name: crio

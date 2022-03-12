@@ -1,8 +1,19 @@
 ---
+# Azure vars
+subscriptionId:
+accessPort: 31186
+
+# nfs vars
 nfs_dir: '/srv/nfs'
+mysql_dir: '/srv/nfs/mysql'
+wordpress_dir: '/srv/nfs/wordpress'
+
+# DeploymentVariables
 appWorkDir: /opt/deployment/
 appPrefix: webapp-volumes 
 namespace: webapp-volumes
 appPrefix1: apirest
 namespace1: apirest
-accessPort: 31186
+appPrefix2: wordpress
+namespace2: wordpress
+

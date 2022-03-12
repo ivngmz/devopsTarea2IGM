@@ -1,0 +1,34 @@
+---
+#########################
+## PV para WORDPRESS  ###
+########################
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-wordpress
+spec:
+  capacity:
+    storage: 25Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: wordpress
+  mountOptions:
+  nfs:
+    path: /srv/nfs/wordpress
+    server: 192.168.1.11
+---
+###########################
+## CLAIM PARA  WORDPRESS ##
+###########################
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-wordpress
+spec:
+  storageClassName: wordpress
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi

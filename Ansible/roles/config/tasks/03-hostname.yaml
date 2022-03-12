@@ -1,10 +1,10 @@
 ---
- - name: Cambio de nombre de host
+ - name: "Cambio de nombre de host"
    hostname:
      name: "{{ inventory_hostname }}"
    when:
      ansible_fqdn != ansible_ssh_host
- - name: Sustituye antiguo nombre de host en /etc/hosts
+ - name: "Sustituye antiguo nombre de host en /etc/hosts"
    tags:
      - hosts
    lineinfile:
@@ -14,7 +14,7 @@
      regexp: "^{{ ansible_default_ipv4.address }}"
    when:
      ansible_fqdn != inventory_hostname
- - name: Compprueba el cambio
+ - name: "Comprueba el cambio"
    tags:
      - validate
    assert:

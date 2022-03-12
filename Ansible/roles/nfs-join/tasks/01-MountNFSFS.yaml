@@ -5,10 +5,13 @@
       - nfs-utils
       - nfs4-acl-tools
     state: latest
+
 - name: "Muestra si existe conectividad con master"
   shell: "showmount -a 192.168.1.11"
+
 - name: "Confirma descubrimiento de exports"
   shell: "showmount -e 192.168.1.11"
+
 - name: "Monta unidad en máquina huesped"
   ansible.posix.mount:
     fstype: nfs
@@ -18,13 +21,16 @@
     path: "/srv/nfs"
     boot: yes
   register: salida
+
 - name: "Muestro resultado check anterior"
   ansible.builtin.debug:
     msg: "{{ salida }}"
+
 - name: "Recarga unidades"
   ansible.posix.mount:
     path: /srv/nfs
     state: remounted
+
 - name: Monta todos los filesystems
   shell: mount -a   
 ...

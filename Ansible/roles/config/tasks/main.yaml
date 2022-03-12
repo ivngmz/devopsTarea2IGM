@@ -8,5 +8,5 @@
     - include_tasks: 06-python3Inst.yaml     
     - include_tasks: 07-unswapping.yaml      
     - include_tasks: 08-selinux.yaml         
-  throttle: 1
+      #  throttle: 1
 ...

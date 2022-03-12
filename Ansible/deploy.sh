@@ -1,0 +1,7 @@
+#!/bin/sh
+#Recupero los datos de las IPs públicas y modifico inventario
+sh shared_files/checkIP.sh
+#Realizo conexiones de pruva para validar en knownhosts
+sh shared_files/sshConnections.sh
+#Comienza la ejecucion de playbook y despliegue
+ansible-playbook -i inventory playbook.yaml

@@ -1,13 +1,15 @@
 ---
-- name: Generate join command
+- name: "Genero comando join para ejecucion en nodo"
   shell: kubeadm token create --print-join-command
   register: join_command
   environment:
     KUBECONFIG: '/etc/kubernetes/admin.conf'
-- name: Copy join command to local file
+
+- name: "Copio el comando join para uso posterior"
   copy: 
     content: "{{ join_command.stdout_lines[0] }}" 
     dest: '.join-command.txt'
+
 - name: "Recupero informacion de conexion de nodos"
   fetch:
     src: .join-command.txt

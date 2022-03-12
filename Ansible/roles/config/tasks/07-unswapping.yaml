@@ -1,5 +1,5 @@
 ---
-- name: Deshabilita swapping com requeirmiento de kubernetes
+- name: "Deshabilita swapping com requeirmiento de kubernetes"
   replace:
     path: /etc/fstab
     regexp: '^([^#].*?\sswap\s.*)$'

@@ -2,4 +2,6 @@
 {% for host in groups['ALL'] %}
 {% set short_name = host.split('.') %}
 {{ nfs_dir }} {{ hostvars[host].ansible_default_ipv4.address }}(rw,sync)
+{{ wordpress_dir }} {{ hostvars[host].ansible_default_ipv4.address }}(rw,sync)
+{{ mysql_dir }} {{ hostvars[host].ansible_default_ipv4.address }}(rw,sync)
 {% endfor %}

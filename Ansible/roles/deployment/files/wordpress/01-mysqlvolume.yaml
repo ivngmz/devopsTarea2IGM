@@ -1,0 +1,35 @@
+---
+#####################
+## PV para MySQL  ###
+#####################
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-mysql
+spec:
+  capacity:
+    storage: 25Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: mysql
+  mountOptions: 
+  nfs:
+    path: /srv/nfs/mysql
+    server: 192.168.1.11
+
+---
+######################
+## CLAIM PARA MYSQL ##
+######################
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-mysql
+spec:
+  storageClassName: mysql
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi

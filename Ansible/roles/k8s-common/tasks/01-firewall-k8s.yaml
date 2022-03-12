@@ -5,23 +5,27 @@
     after: 'AllowZoneDrifting='
     regexp: '^(.+)$'
     replace: 'no'
+
 - name: "Añado modulo br_netfilter"
   community.general.modprobe:
     name: br_netfilter
     state: present
   register: salida1
+
 - name: "Agrego masquerade permanente"
   ansible.posix.firewalld:
     masquerade: yes
     state: enabled
     permanent: yes
   register: salida2
+
 - name: "Copia archivo k8s.conf"
   ansible.builtin.copy:
     src:  ../templates/k8s.conf
     dest: /etc/sysctl.d/k8s.conf
     mode: '0664'
   register: result
+
 - name: "Reinicia sysctl, recargando todos los archivos de configuracion"
   shell: sysctl --system
   when: result.changed
@@ -29,6 +33,7 @@
   pause:
     seconds: 20
   when: result.changed
+
 - name: "Abro puertos de comunicacion entre pods y master"
   ansible.posix.firewalld:
     port: "{{ item }}"
@@ -38,6 +43,7 @@
     - 8285/tcp
     - 8472/tcp
   register: salida3
+
 - name: "Mostrando salida ejecucion de role"
   ansible.builtin.debug:
     msg: "{{ item }}"
@@ -45,6 +51,7 @@
     - "{{ salida1 }}"
     - "{{ salida2 }}"
     - "{{ salida3 }}"
+
 - name: "Reinicio firewalld"
   systemd:
     name: firewalld

@@ -4,18 +4,14 @@
   delegate_to: "{{item}}"
   delegate_facts: True
   with_items: "{{ groups['WORKERS'] }}"
-  #- name: "Añadir a exports"
-  #  lineinfile:
-  #    path: /etc/exports
-  #    state: present
-  #    line: "{{ nfs_dir }} {{ item }}(rw,sync)"
-  #  with_items: "{{ groups['ALL'] }}" 
+
 - name: "Reinicia servicio"
   ansible.builtin.systemd:
     daemon_reload: yes
     state: restarted
     enabled: yes
     name: nfs-server.service
+
 - name: creacion de templates
   template:
     src: exportsTemp.j2
@@ -24,11 +20,14 @@
     group: root
     mode: 0644
   become: true
+
 - name: "Recarga exports"
   command: exportfs -r
+
 - name: ""
   command: exportfs -s
   register: result
+
 - name: "muestro el resultado de las modificaciones con la salida del comando anterior"
   ansible.builtin.debug:
     msg: "{{ result }}"

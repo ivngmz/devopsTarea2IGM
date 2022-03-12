@@ -1,4 +1,6 @@
 ---
 - include_tasks: 01-ingress.yaml
-- include_tasks: 02-ReinicioHAProxy.yaml
+- include_tasks: 02-reinicioHAProxy.yaml
+- include_tasks: 03-habilitoMasterNode.yaml
+- include_tasks: 04-postTask.yaml
 ...

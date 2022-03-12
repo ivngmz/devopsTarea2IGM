@@ -1,0 +1,22 @@
+- name: "Copia archivo Script para su ejecucion. Con este ecript se extrae la informacion de nodo y host del pod haproxy"   
+  ansible.builtin.copy:                                                           
+    src:  files/
+    dest: "/home/{{ ansible_user }}/"
+    mode: '0755'                                                                  
+- name: Ejecuta script                                
+  shell: "sh /home/{{ ansible_user }}/haproxyData.sh"
+  register: nodeport
+- name: "Copio la salida anterior a fichero local"
+  copy:
+    content: "{{ nodeport.stdout }}"
+    dest: "shared_files/nodeport"
+  delegate_to: localhost
+  become_user: "{{ current_user }}"
+- name: "Modifico valores en archivos terrafom con la ejecucion de script"
+  ansible.builtin.command: sh -x shared_files/modHAnodePort.sh
+  delegate_to: 127.0.0.1
+  become_user: "{{ current_user }}"
+- name: "Prueba de conexion a través de ingress"
+  shell: sh -x shared_files/checkStatusUP.sh roles/deployment/files/apirest/apirest.yaml
+  delegate_to: 127.0.0.1
+  become_user: "{{ current_user }}"

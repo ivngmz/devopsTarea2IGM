@@ -1,11 +1,11 @@
 ---
-- name: Disable SELinux
+- name: "Desabilita SELinux"
   ansible.posix.selinux:
     state: disabled
   register: result
   notify:
     - Reinicio host
-- name: Print return information from the previous task
+- name: "Imprimo informacion de la tarea anterior"
   ansible.builtin.debug:
     var: result
 ...

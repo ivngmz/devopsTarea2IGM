@@ -1,25 +1,46 @@
 ---
+
 - name: "Configuro variable persistente"
   shell: echo 'KUBECONFIG=/etc/kubernetes/admin.conf' >> /etc/environment
+
 - name: "Descarga imagenes"
   shell: kubeadm config images pull
+
 - name: "Inicializa pod network"
   shell: kubeadm init --pod-network-cidr 192.169.0.0/16
-  register: salida1
   ignore_errors: true
-- name: Pausa de 120 segundos
-  pause:
-    seconds: 120
+
+- name: "Compruebo la red configurada"
+  shell: kubectl get nodes -o jsonpath='{.items[*].spec.podCIDR}'
+  register: salida1
 - debug: msg= "{{ salida1 }}"
+
 - name: "Crear directorio para configuracion Kuberntetes y uso con perfil root"
   file:
-    path: /root/.kube/ 
+    path: /home/kubeadmin/.kube/ 
     state: directory
     owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
     mode: 0774
     recurse: yes
-- name: "Copy archivo conf"
+
+- name: "Crea un usuario administrador adicional: kubeadmin y se crea clave ssh"
+  ansible.builtin.user:
+    name: kubeadmin
+    create_home: true
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+
+- name: "Crear directorio para configuracion Kuberntetes y uso con perfil kubeadmin"
+  file:
+    path: /root/.kube/
+    state: directory
+    owner: kubeadmin
+    group: kubeadmin
+    mode: 0774
+    recurse: yes
+
+- name: "Copy archivo conf para root"
   ansible.builtin.copy:
     src: /etc/kubernetes/admin.conf
     dest: /root/.kube/config
@@ -27,14 +48,18 @@
     owner: root
     group: root
     mode: 0600
-            #- name: "Instalo tigera operator"
-            #  shell: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
-            #- name: "Descargo Calico custom-resources.yaml"
-            #  shell: wget https://docs.projectcalico.org/manifests/custom-resources.yaml -O /root/.kube/custom-resources.yaml
-            #- name: "Modifico CIDR"
-            #  shell: sed -i 's/192.168.0.0/192.169.0.0/g' /root/.kube/custom-resources.yaml
-            #- name: "Levanto configuraciones de custom-resources.yaml"
-            #  shell: kubectl apply -f /root/.kube/custom-resources.yaml
+
+- name: "Copy archivo conf para kubeadmin"
+  ansible.builtin.copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/kubeadmin/.kube/config
+    remote_src: yes
+    owner: kubeadmin
+    mode: 0600
+
+- name: "Agrego a Sudoers kubeadmin"
+  shell: echo "kubeadmin    ALL=(ALL)       ALL" > /etc/sudoers.d/kubeadmin
+
 - name: "Configuro network provider con Calico Azure"
   shell: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
   ignore_errors: true
