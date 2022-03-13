@@ -27,9 +27,7 @@ else
 fi
 
 # Almaceno IP pública
-
-echo ""
-echo "publicIP: " $nodeIP >> $srcDataFile
+sed -i 's/publicIP.*/publicIP: '$nodeIP'/g' $srcDataFile
 
 # Extraigo dato de configuracion actual terraform
 currentfileIP=`grep -n destination_address_prefix $tfFile | grep 30 | cut -d '"' -f2`
