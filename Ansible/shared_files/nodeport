@@ -1,2 +1,3 @@
 nodeport:  32608
-node:  "worker1-vm.tarea2.unir"publicIP:  20.126.106.43
+node:  "worker1-vm.tarea2.unir"
+publicIP:  20.126.106.43
