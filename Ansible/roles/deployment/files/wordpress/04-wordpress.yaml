@@ -41,7 +41,7 @@ spec:
         - name: WORDPRESS_DB_HOST
           value: mysql
         - name: WORDPRESS_DB_PASSWORD
-          value: icalskdsddsdpasswrd
+          value: password
         ports:
         - containerPort: 80
           name: wordpress
@@ -49,6 +49,6 @@ spec:
         - name: wordpress-persistent-storage
           mountPath: /var/www/html
       volumes:
-       - name: wordpress-persistent-storage
+      - name: wordpress-persistent-storage
         persistentVolumeClaim:
           claimName: pvc-wordpress
