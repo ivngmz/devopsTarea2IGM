@@ -38,10 +38,14 @@ spec:
       - image: wordpress:5.9-apache
         name: wordpress
         env:
+        - name: WP_HOST
+          value: wordpress
+        - name: DB_HOST
+          value: mysql:3306
         - name: WORDPRESS_DB_HOST
           value: mysql
         - name: WORDPRESS_DB_PASSWORD
-          value: password
+          value: icalskdsddsdpasswrd
         ports:
         - containerPort: 80
           name: wordpress
