@@ -11,8 +11,8 @@ masterip=$(az vm list-ip-addresses --subscription=b32052cd-407e-4571-ad05-c3a40d
 worker1ip=$(az vm list-ip-addresses --subscription=b32052cd-407e-4571-ad05-c3a40dcec58c --resource-group KUBERNETES_RG --name worker1-vm | jq -r '.[0].virtualMachine.network.publicIpAddresses[0].ipAddress')
 
 
-echo $worker1ip
-echo $worker1ip
+echo "IP del master: " $masterip
+echo "IP del worker1: " $worker1ip
 
 # Modificar inventario
 
