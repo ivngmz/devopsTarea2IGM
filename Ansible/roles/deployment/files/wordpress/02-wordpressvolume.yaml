@@ -1,7 +1,4 @@
----
-#########################
-## PV para WORDPRESS  ###
-########################
+--
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -18,9 +15,6 @@ spec:
     path: /srv/nfs/wordpress
     server: 192.168.1.11
 ---
-###########################
-## CLAIM PARA  WORDPRESS ##
-###########################
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
