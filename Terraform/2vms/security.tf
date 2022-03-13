@@ -27,7 +27,7 @@ resource "azurerm_network_security_group" "mySecGroup" {
         source_port_range          = "*"
         destination_port_range     = "30010"
         source_address_prefix      = "*"
-        destination_address_prefix = "*"
+        destination_address_prefix = "192.168.1.12"
     }
     tags = {
         environment = "Tarea2"
