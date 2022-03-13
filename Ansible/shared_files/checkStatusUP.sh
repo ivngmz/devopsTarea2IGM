@@ -15,8 +15,8 @@ resource=`grep -A20 'kind: Ingress' $file | grep "path: " | awk '{print $3}' | c
 # curl -I -H "Host: $domain" "http://${destinationIP}:${nodeport}${resource}"
 
 # Muestro URLs de acceso:
-echo "Por favor habilite en la consola de azure el puerto indicado: " $nodeport
-echo "Es necesario relacionar en fichero hosts: " $domain " " $destinationIP
-echo "La URL de acceso:"
-echo "http://"${domain}:${nodeport}${resource}
-echo "También se puede utilizar: curl -I -H \"Host: "$domain"\" \"http://"${destinationIP}:${nodeport}${resource}\"
+echo "Por favor habilite en la consola de azure el puerto indicado: " $nodeport > informacionCheckeo.txt
+echo "Es necesario relacionar en fichero hosts: " $domain " " $destinationIP >> informacionCheckeo.txt
+echo "La URL de acceso:" >> informacionCheckeo.txt
+echo "http://"${domain}:${nodeport}${resource} >> informacionCheckeo.txt
+echo "También se puede utilizar: curl -I -H \"Host: "$domain"\" \"http://"${destinationIP}:${nodeport}${resource}\" >> informacionCheckeo.txt
