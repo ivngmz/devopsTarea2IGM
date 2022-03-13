@@ -6,17 +6,23 @@ Para este despliegue de configuraciones, he tenido que desplegar terraform con A
 
 Los requisitos previos serían: 
 - ansible
-- terraform
-- git
-- jq.
-- azure cli
 ```
 dnf install epel-release -y
 dnf install ansible git tree jq -y
 dnf install python36 -y
+```
+- terraform
+```
 yum install -y yum-utils
 yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 yum -y install terraform
+```
+- git
+dnf install git -y
+- jq
+dnf install jq -y
+- azure cli
+```
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
 echo -e "[azure-cli]
 name=Azure CLI
