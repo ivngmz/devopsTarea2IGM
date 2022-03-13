@@ -16,7 +16,7 @@
   ansible.builtin.command: sh -x shared_files/modHAnodePort.sh
   delegate_to: 127.0.0.1
   become_user: "{{ current_user }}"
-- name: "Prueba de conexion a través de ingress"
+- name: "Genero endpolints para pruebas de conexion"
   shell: sh -x shared_files/checkStatusUP.sh roles/deployment/files/apirest/apirest.yaml
   delegate_to: 127.0.0.1
   become_user: "{{ current_user }}"
