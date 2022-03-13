@@ -27,6 +27,7 @@
   ansible.builtin.user:
     name: kubeadmin
     create_home: yes
+    home: /home/kubeadmin
     skeleton: true
     shell: /bin/bash
     generate_ssh_key: yes
