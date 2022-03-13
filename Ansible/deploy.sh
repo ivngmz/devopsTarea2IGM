@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Levanta la infraestructura con terraform
-cd ../Terraform/2vms/; terraform apply --auto-approve; cd -
+cd ../Terraform/2vms/; terraform init; terraform apply --auto-approve; cd -
 
 # Recupero los datos de las IPs públicas y modifico inventario
 sh shared_files/checkIP.sh
