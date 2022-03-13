@@ -17,10 +17,10 @@ sed -i -E '27,31 s/[[:digit:]]{5}/'$nodeport'/g' $tfFile
 # Comparo variable extraida para determinar nodo
 if [ "$node" = "worker1-vm.tarea2.unir" ]
   then
-    nodeIP=`grep 'worker1IP=' inventory | cut -d '=' -f2`
+    nodeIP=`grep -A 3 ALL inventory | grep worker1 | awk '{print $3}' | cut -d '=' -f2`
 elif [ "$node" = "worker1-vm.tarea2.unir" ]
   then
-    nodeIP=`grep 'masterIP=' inventory | cut -d '=' -f2`
+    nodeIP=`grep -A 3 ALL inventory | grep master | awk '{print $3}' | cut -d '=' -f2`
 else
   echo "Tenemos un problema"
   exit 255
