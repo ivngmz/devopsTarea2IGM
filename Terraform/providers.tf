@@ -6,12 +6,3 @@ terraform {
     }
   }
 }
-
-# crea un service principal y rellena los siguientes datos para autenticar
-provider "azurerm" {
-  features {}
-      subscription_id = "Completar"
-      client_id = "Completar" # appID
-      client_secret = "Completar" # password
-      tenant_id = "Completar" # tenant
-}
