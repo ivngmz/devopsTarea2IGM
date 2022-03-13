@@ -60,8 +60,8 @@
     owner: adminDevOps
     mode: 0600
 
-#- name: "Agrego a Sudoers adminDevOps"
-#  shell: echo "adminDevOps    ALL=(ALL)       ALL" > /etc/sudoers.d/adminDevOps
+- name: "Agrego a Sudoers adminDevOps"
+  shell: chmod 666 /etc/kubernetes/admin.conf
 
 - name: "Configuro network provider con Calico Azure"
   shell: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
