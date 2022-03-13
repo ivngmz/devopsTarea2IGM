@@ -15,31 +15,31 @@
   register: salida1
 - debug: msg= "{{ salida1 }}"
 
-- name: "Crear directorio para configuracion Kuberntetes y uso con perfil root"
+- name: "Crear directorio para configuracion Kuberntetes y uso con perfil adminDevOps"
   file:
-    path: /home/kubeadmin/.kube/ 
+    path: /home/adminDevOps/.kube/ 
     state: directory
-    owner: "{{ ansible_user }}"
+    owner: adminDevOps
     mode: 0774
     recurse: yes
 
-- name: "Crea un usuario administrador adicional: kubeadmin y se crea clave ssh"
-  ansible.builtin.user:
-    name: kubeadmin
-    create_home: yes
-    home: /home/kubeadmin
-    skeleton: true
-    shell: /bin/bash
-    generate_ssh_key: yes
-    ssh_key_bits: 2048
-    ssh_key_file: .ssh/id_rsa
+#- name: "Crea un usuario administrador adicional: kubeadmin y se crea clave ssh"
+#  ansible.builtin.user:
+#    name: kubeadmin
+#    create_home: yes
+#    home: /home/kubeadmin
+#    skeleton: true
+#    shell: /bin/bash
+#    generate_ssh_key: yes
+#    ssh_key_bits: 2048
+#    ssh_key_file: .ssh/id_rsa
 
-- name: "Crear directorio para configuracion Kuberntetes y uso con perfil kubeadmin"
+- name: "Crear directorio para configuracion Kuberntetes y uso con perfil root"
   file:
     path: /root/.kube/
     state: directory
-    owner: kubeadmin
-    group: kubeadmin
+    owner: root
+    group: root
     mode: 0774
     recurse: yes
 
@@ -52,16 +52,16 @@
     group: root
     mode: 0600
 
-- name: "Copy archivo conf para kubeadmin"
+- name: "Copy archivo conf para adminDevOps"
   ansible.builtin.copy:
     src: /etc/kubernetes/admin.conf
-    dest: /home/kubeadmin/.kube/config
+    dest: /home/adminDevOps/.kube/config
     remote_src: yes
-    owner: kubeadmin
+    owner: adminDevOps
     mode: 0600
 
-- name: "Agrego a Sudoers kubeadmin"
-  shell: echo "kubeadmin    ALL=(ALL)       ALL" > /etc/sudoers.d/kubeadmin
+#- name: "Agrego a Sudoers adminDevOps"
+#  shell: echo "adminDevOps    ALL=(ALL)       ALL" > /etc/sudoers.d/adminDevOps
 
 - name: "Configuro network provider con Calico Azure"
   shell: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml
