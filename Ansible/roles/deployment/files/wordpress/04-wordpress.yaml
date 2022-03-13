@@ -20,7 +20,7 @@ kind: Deployment
 metadata:
   name: wordpress
   labels:
-   app: wordpress
+    app: wordpress
 spec:
   selector:
     matchLabels:
@@ -32,7 +32,7 @@ spec:
     metadata:
       labels:
         app: wordpress
-      tier: frontend
+        tier: frontend
     spec:
       containers:
       - image: wordpress:5.9-apache
@@ -48,7 +48,3 @@ spec:
         volumeMounts:
         - name: wordpress-persistent-storage
           mountPath: /var/www/html
-      volumes:
-      - name: wordpress-persistent-storage
-        persistentVolumeClaim:
-          claimName: pvc-wordpress
