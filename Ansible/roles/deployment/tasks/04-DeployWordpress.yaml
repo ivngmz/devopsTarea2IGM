@@ -4,6 +4,8 @@
   ignore_errors: true
 - name: "Cambio propietario de /nfs/srv/mysql"
   shell: chown 999:999 /srv/nfs/mysql
+- name: "Cambio propietario de /nfs/srv/wordpress"
+  shell: chown 33:33 /srv/nfs/mysql
 - name: "Desplegando aplicacion"
   shell: "kubectl apply -f {{ appWorkDir }}{{ appPrefix2 }}/01-mysqlvolume.yaml -n {{ namespace2 }}"
 - name: "Desplegando aplicacion"
